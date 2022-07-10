@@ -6,18 +6,19 @@ export default function Badge({
   title = "Title",
   value = "10",
   type = "normal",
-  size = "sm"
+  size = "sm",
+  max = 20,
+  min = 15
 }) {
   const styles = {
     backgroundColor:
-      value > 15 && value <= 20
+      value > min && value <= max
         ? colors.success
-        : value >= 10 && value <= 15
+        : value >= (min - 3 > 0 ? min - 3 : 1) && value <= min
         ? colors.warning
         : colors.danger,
     color: "#1f2328",
-    fontSize:
-      size === "lg" ? "2rem" : size === "md" ? "1.5rem" : { undefined },
+    fontSize: size === "lg" ? "2rem" : size === "md" ? "1.5rem" : { undefined },
     fontWeight: size === "sm" ? { undefined } : "bold"
   };
 

@@ -80,12 +80,13 @@ export default function App() {
           flex
           flex-row
           justify-center
+          items-center
           flex-wrap
           w-full
         "
       >
         {/* Left side */}
-        <div className="flex flex-row items-start flex-wrap">
+        <div className="flex flex-row items-start flex-wrap justify-center items-center">
           {/* Hours */}
           <Wrapper title="Hours">
             <LineWrapper>
@@ -200,15 +201,20 @@ export default function App() {
             </LineWrapper>
           </Wrapper>
         </div>
+
         <Button onClick={handleClick}>🚀</Button>
-        <Divider vertical={true} />
 
         {/* Right side */}
-        <div>
+        <div className="flex flex-col items-start flex-wrap justify-center items-center">
           {/* Badges */}
-
-          <div className="flex flex-row flex-wrap justify-between items-center gap-4 mt-12">
-            <Badge title="Total" type="main" value={total} />
+          <div className="flex flex-row flex-wrap justify-between items-center gap-4 mt-12 m-4">
+            <Badge
+              title="Total"
+              type="main"
+              value={total}
+              max={max}
+              min={min}
+            />
             <Badge title="max" value={max} />
             <Badge title="min" value={min} />
             <Badge title="ClassA" value={classATotal} />
@@ -216,36 +222,37 @@ export default function App() {
             <Badge title="ClassC" value={classCTotal} />
           </div>
 
-          {/* Progresses  */}
-          <LineProgress
-            percentageA={(classATotal / max) * 100}
-            percentageB={(classBTotal / max) * 100}
-            percentageC={(classCTotal / max) * 100}
-          />
-
           {/* Dashboard */}
-          <div className="flex flex-row flex-wrap">
-            <RingProgress
-              title="Class A"
-              color={colors.classA}
-              percent={ifNotNaNGetZero(
-                ((classATotal / total) * 100).toFixed(0)
-              )}
+          <div className="flex flex-col flex-wrap m-4">
+            {/* Progresses  */}
+            <LineProgress
+              percentageA={(classATotal / max) * 100}
+              percentageB={(classBTotal / max) * 100}
+              percentageC={(classCTotal / max) * 100}
             />
-            <RingProgress
-              title="Class B"
-              color={colors.classB}
-              percent={ifNotNaNGetZero(
-                ((classBTotal / total) * 100).toFixed(0)
-              )}
-            />
-            <RingProgress
-              title="Class C"
-              color={colors.classC}
-              percent={ifNotNaNGetZero(
-                ((classCTotal / total) * 100).toFixed(0)
-              )}
-            />
+            <div className="flex flex-row flex-wrap mt-4 justify-center items-center flex-grow">
+              <RingProgress
+                title="Class A"
+                color={colors.classA}
+                percent={ifNotNaNGetZero(
+                  ((classATotal / total) * 100).toFixed(0)
+                )}
+              />
+              <RingProgress
+                title="Class B"
+                color={colors.classB}
+                percent={ifNotNaNGetZero(
+                  ((classBTotal / total) * 100).toFixed(0)
+                )}
+              />
+              <RingProgress
+                title="Class C"
+                color={colors.classC}
+                percent={ifNotNaNGetZero(
+                  ((classCTotal / total) * 100).toFixed(0)
+                )}
+              />
+            </div>
           </div>
         </div>
       </div>

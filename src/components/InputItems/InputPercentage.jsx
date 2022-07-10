@@ -26,8 +26,8 @@ export default function InputPercentage({
     } else if (isIncrement && outOfPercentage) {
       alert("Can't be more than 100");
     } else {
-      onChange(name, value, title);
-      setValue(e.target.value);
+      onChange(name, newValue, title);
+      setValue(newValue);
     }
   };
 

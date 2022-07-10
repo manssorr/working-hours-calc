@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Input, InputGroup } from "react-daisyui";
 
 export default function InputMaxMin({
@@ -8,28 +8,50 @@ export default function InputMaxMin({
   onChange,
   max,
   min,
-  isDisabled = false
+  isDisabled = false,
+  type
 }) {
   const [value, setValue] = useState(val);
 
-  const handleChangeMaxMin = (e) => {
+  const handleChangeMax = (e) => {
+    const oldValue = value;
+    const newValue = e.target.value;
+
+    const isDecrement = newValue < oldValue;
+    const isPositive = newValue >= 0;
+    const isMaxEqualMin = max === min;
+
+    if (isDecrement && !isPositive) {
+      alert("Max can't be less than 0");
+    } else if (isMaxEqualMin && isDecrement) {
+      alert("Max can't be less than min");
+    } else {
+      setValue(newValue);
+      onChange(name, newValue, title);
+    }
+  };
+
+  const handleChangeMin = (e) => {
     const oldValue = value;
     const newValue = e.target.value;
     const isIncrement = newValue > oldValue;
     const isDecrement = newValue < oldValue;
 
     const isPositive = newValue >= 0;
-    const outOfRange = newValue > max;
+
+    const isMaxEqualMin = max === min;
 
     if (isDecrement && !isPositive) {
-      alert("Can't be less than 0");
-    } else if (isIncrement && outOfRange) {
-      alert("Can't be more than " + max);
+      alert("Min can't be less than 0");
+    } else if (isMaxEqualMin && isIncrement) {
+      alert("Min can't be more than Max");
     } else {
-      onChange(name, value, title);
-      setValue(e.target.value);
+      setValue(newValue);
+      onChange(name, newValue, title);
     }
   };
+
+  const onChangeMinMax = type === "max" ? handleChangeMax : handleChangeMin;
 
   return (
     <>
@@ -53,7 +75,7 @@ export default function InputMaxMin({
           className="text-center"
           type="number"
           value={value}
-          onChange={handleChangeMaxMin}
+          onChange={onChangeMinMax}
           placeholder="10"
         />
       </InputGroup>

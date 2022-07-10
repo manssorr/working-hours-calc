@@ -1,19 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Input, InputGroup } from "react-daisyui";
 
-export default function InputItem({
-  title,
-  name,
-  val,
-  onChange,
-  isDisabled = false
-}) {
-  const [value, setValue] = useState(val);
-
-  const handleChange = (e) => {
-    onChange(name, e.target.value, title);
-    setValue(e.target.value);
-  };
+export default function InputView({ title, val, unit }) {
+  console.log("🚀 ~ val", val);
 
   return (
     <>
@@ -32,14 +21,14 @@ export default function InputItem({
         >
           {title}
         </span>
-        <Input
-          disabled={isDisabled}
-          className="text-center"
-          type="number"
-          value={value}
-          onChange={handleChange}
-          placeholder="10"
-        />
+        <span
+          style={{
+            minWidth: "fit-content"
+          }}
+          className="text-2x6 text-center font-san"
+        >
+          {val} {unit}
+        </span>
       </InputGroup>
     </>
   );

@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   maximum: 20,
   minimum: 15,
-  sar: 5.0,
+  sarPerHour: 75,
+  sarPerLE: 5.0,
   classA: {
     hours: 0,
     percentage: 100
@@ -22,13 +23,10 @@ export const hoursReducer = createSlice({
   name: "hours",
   initialState,
   reducers: {
-    handleHoursChange: (state, action) => {
+    handleSpecChange: (state, action) => {
       const { name, value } = action.payload;
+
       state[name] = Number(value);
-      // return {
-      //   ...state,
-      //   [name]: Number(value)
-      // };
     },
     handleClassesChangeValue: (state, action) => {
       const { name, value } = action.payload;
@@ -43,7 +41,7 @@ export const hoursReducer = createSlice({
 
 // Action creators are generated for each case reducer function
 export const {
-  handleHoursChange,
+  handleSpecChange,
   handleClassesChangeValue,
   handleClassesChangePercentage
 } = hoursReducer.actions;
@@ -55,13 +53,15 @@ export default hoursReducer.reducer;
 export const selectState = (state) => state.hours;
 export const selectMaxHours = (state) => state.hours.maximum;
 export const selectMinHours = (state) => state.hours.minimum;
-export const selectSar = (state) => state.hours.sar;
+export const selectsarPerHour = (state) => state.hours.sar;
+export const selectSarPerLE = (state) => state.hours.sarPerLE;
 
 export const selectDirects = (state) => {
   return {
     min: state.hours.minimum,
     max: state.hours.maximum,
-    sar: state.hours.sar
+    sarPerHour: state.hours.sarPerHour,
+    sarPerLE: state.hours.sarPerLE
   };
 };
 

@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import { Button, Divider } from "react-daisyui";
 
 import { saveState } from "./browser-storage";
@@ -9,7 +9,8 @@ import {
   InputHours,
   InputMaxMin,
   InputItem,
-  InputPercentage
+  InputPercentage,
+  InputView
 } from "./components/InputItems";
 import LineProgress from "./components/Progresses/LineProgress";
 import RingProgress from "./components/Progresses/RingProgress";
@@ -23,8 +24,9 @@ import {
   selectMaxHours,
   selectMinHours,
   selectTotal,
-  selectSar,
-  handleHoursChange,
+  selectSarPerHour,
+  selectSarPerLE,
+  handleSpecChange,
   handleClassesChangeValue,
   handleClassesChangePercentage,
   selectDirects
@@ -38,18 +40,19 @@ export default function App() {
 
   function handleClick() {
     forceUpdate();
-    console.log("🚀 ~ l");
   }
 
-  const { max, min, sar } = useSelector(selectDirects);
+  const { max, min, sarPerHour, sarPerLE } = useSelector(selectDirects);
 
   const { classATotal, classBTotal, classCTotal, total } =
     useSelector(selectTotal);
 
   const { classA, classB, classC } = useSelector(selectClasses);
 
+  useEffect(() => console.log("re-render because max changed:", max), [max]);
+
   const handleOne = (name, value, type) => {
-    dispatch(handleHoursChange({ name, value }));
+    dispatch(handleSpecChange({ name, value }));
   };
 
   const handleTwo = (name, value, title) => {
@@ -91,6 +94,9 @@ export default function App() {
                 name="maximum"
                 val={max}
                 onChange={handleOne}
+                max={max}
+                min={min}
+                type="max"
               />
 
               <InputMaxMin
@@ -98,6 +104,9 @@ export default function App() {
                 name="minimum"
                 val={min}
                 onChange={handleOne}
+                max={max}
+                min={min}
+                type="min"
               />
             </LineWrapper>
 
@@ -105,18 +114,27 @@ export default function App() {
             <Wrapper title="Income">
               <LineWrapper>
                 <InputItem
-                  title="SAR"
-                  name="sar"
-                  val={sar}
+                  title="SAR/Hour"
+                  name="sarPerHour"
+                  val={sarPerHour}
                   onChange={handleOne}
                 />
-
                 <InputItem
-                  title="SALARY"
-                  name="salary"
-                  val={Number(sar) * Number(total)}
-                  isDisabled={true}
+                  title="SAR/LE"
+                  name="sarPerLE"
+                  val={sarPerLE}
+                  onChange={handleOne}
                 />
+                <InputView
+                  title="Salary/SR"
+                  val={sarPerHour * total}
+                  unit="SR"
+                />
+                {/* <InputView
+                  title="Salary/LE"
+                  val={sarPerHour * total * sarPerLE}
+                  unit="LE"
+                /> */}
               </LineWrapper>
             </Wrapper>
           </Wrapper>

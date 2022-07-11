@@ -1,8 +1,5 @@
 import { useEffect, useReducer } from "react";
-import { Button, Divider } from "react-daisyui";
-
-import { saveState } from "./browser-storage";
-import { debounce } from "debounce";
+import { Button } from "react-daisyui";
 
 import {
   InputHours,
@@ -20,15 +17,12 @@ import colors from "./assets/colors";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectClasses,
-  selectMaxHours,
-  selectMinHours,
   selectTotal,
-  selectSarPerHour,
-  selectSarPerLE,
+  selectDirects,
+  reset,
   handleSpecChange,
   handleClassesChangeValue,
-  handleClassesChangePercentage,
-  selectDirects
+  handleClassesChangePercentage
 } from "./features/hours/hoursSlice";
 import Badge from "./components/Badge";
 
@@ -38,7 +32,10 @@ export default function App() {
   const [_, forceUpdate] = useReducer((x) => x + 1, 0);
 
   function handleClick() {
+    dispatch(reset());
     forceUpdate();
+
+    console.log("🚀 ~ App reseted 🚽");
   }
 
   const { max, min, sarPerHour, sarPerLE } = useSelector(selectDirects);

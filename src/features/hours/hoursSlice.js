@@ -35,7 +35,8 @@ export const hoursReducer = createSlice({
     handleClassesChangePercentage: (state, action) => {
       const { name, value } = action.payload;
       state[name].percentage = Number(value);
-    }
+    },
+    reset: () => initialState
   }
 });
 
@@ -43,7 +44,8 @@ export const hoursReducer = createSlice({
 export const {
   handleSpecChange,
   handleClassesChangeValue,
-  handleClassesChangePercentage
+  handleClassesChangePercentage,
+  reset
 } = hoursReducer.actions;
 
 export default hoursReducer.reducer;

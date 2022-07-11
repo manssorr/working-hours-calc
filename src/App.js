@@ -68,9 +68,7 @@ export default function App() {
         }}
         className="
         grid grid-flow-col auto-cols-min md:md:auto-cols-max
-        gap-4
-        max-w-full
-        md:h-full        "
+        gap-4 max-w-full  md:h-full"
       >
         {/* Left side */}
         <div className=" flex flex-row flex-wrap justify-center items-center mt-4">

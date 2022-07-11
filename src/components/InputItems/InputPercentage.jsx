@@ -6,11 +6,16 @@ export default function InputPercentage({
   name,
   val,
   onChange,
-  isDisabled = false
+  isDisabled = false,
+  reset
 }) {
-  
-
   const [value, setValue] = useState(val);
+
+  useEffect(() => {
+    console.log("reset", reset);
+    console.log("🚀 ~ InputPercentage Iam reseted 🥳");
+    setValue(val);
+  }, [reset]);
 
   const handleChangePercentage = (e) => {
     const oldValue = value;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input, InputGroup } from "react-daisyui";
 
 export default function InputMaxMin({
@@ -9,9 +9,17 @@ export default function InputMaxMin({
   max,
   min,
   isDisabled = false,
-  type
+  type,
+  reset
 }) {
   const [value, setValue] = useState(val);
+
+  // if reset is true, reset the value to the initial value
+  useEffect(() => {
+    console.log("reset", reset);
+    console.log("🚀 ~ InputMaxMin Iam reseted 🥳");
+    setValue(val);
+  }, [reset]);
 
   const handleChangeMax = (e) => {
     const oldValue = value;

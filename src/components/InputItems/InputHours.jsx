@@ -1,9 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input, InputGroup } from "react-daisyui";
 
-export default function InputHours({ title, name, val, onChange, total, max, isDisabled = false }) {
-
+export default function InputHours({
+  title,
+  name,
+  val,
+  onChange,
+  total,
+  max,
+  isDisabled = false,
+  reset
+}) {
   const [value, setValue] = useState(val);
+
+  useEffect(() => {
+    console.log("reset", reset);
+    console.log("🚀 ~ InputHours Iam reseted 🥳");
+    setValue(val);
+  }, [reset]);
 
   const handleChangeConditional = (e) => {
     const oldValue = value;

@@ -6,9 +6,16 @@ export default function InputItem({
   name,
   val,
   onChange,
-  isDisabled = false
+  isDisabled = false,
+  reset
 }) {
   const [value, setValue] = useState(val);
+
+  useEffect(() => {
+    console.log("reset", reset);
+    console.log("🚀 ~ InputItem Iam reseted 🥳");
+    setValue(val);
+  }, [reset]);
 
   const handleChange = (e) => {
     onChange(name, e.target.value, title);

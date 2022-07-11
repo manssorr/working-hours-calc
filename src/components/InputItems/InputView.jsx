@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Input, InputGroup } from "react-daisyui";
 
 export default function InputView({ title, val, unit, isInt = false }) {
-  console.log("🚀 ~ val", val);
 
   const valToView = isInt ? parseInt(val) : parseFloat(val).toFixed(2);
 

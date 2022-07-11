@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { Button } from "react-daisyui";
 
 import {
@@ -29,12 +29,11 @@ import Badge from "./components/Badge";
 export default function App() {
   const dispatch = useDispatch();
 
-  const [_, forceUpdate] = useReducer((x) => x + 1, 0);
+  const [reseted, setReseted] = useState(false);
 
   function handleClick() {
     dispatch(reset());
-    forceUpdate();
-
+    setReseted((e) => !e);
     console.log("🚀 ~ App Reset-ed 🚽");
   }
 
@@ -44,8 +43,6 @@ export default function App() {
     useSelector(selectTotal);
 
   const { classA, classB, classC } = useSelector(selectClasses);
-
-  useEffect(() => console.log("re-render because max changed:", max), [max]);
 
   const handleOne = (name, value, type) => {
     dispatch(handleSpecChange({ name, value }));
@@ -80,6 +77,7 @@ export default function App() {
                 max={max}
                 min={min}
                 type="max"
+                reset={reseted}
               />
 
               <InputMaxMin
@@ -90,6 +88,7 @@ export default function App() {
                 max={max}
                 min={min}
                 type="min"
+                reset={reseted}
               />
             </LineWrapper>
 
@@ -101,12 +100,14 @@ export default function App() {
                   name="sarPerHour"
                   val={sarPerHour}
                   onChange={handleOne}
+                  reset={reseted}
                 />
                 <InputItem
                   title="SAR/LE"
                   name="sarPerLE"
                   val={sarPerLE}
                   onChange={handleOne}
+                  reset={reseted}
                 />
                 <InputView
                   title="Salary/SR"
@@ -135,6 +136,7 @@ export default function App() {
                 total={total}
                 max={max}
                 isConditional={true}
+                reset={reseted}
               />
               {/* A Percentage */}
               <InputPercentage
@@ -142,6 +144,7 @@ export default function App() {
                 name="classA"
                 val={classA.percentage}
                 onChange={handleTwo}
+                reset={reseted}
               />
             </LineWrapper>
             <LineWrapper>
@@ -154,6 +157,7 @@ export default function App() {
                 total={total}
                 max={max}
                 isConditional={true}
+                reset={reseted}
               />
               {/* B Percentage */}
               <InputPercentage
@@ -161,6 +165,7 @@ export default function App() {
                 name="classB"
                 val={classB.percentage}
                 onChange={handleTwo}
+                reset={reseted}
               />
             </LineWrapper>
             <LineWrapper>
@@ -173,6 +178,7 @@ export default function App() {
                 total={total}
                 max={max}
                 isConditional={true}
+                reset={reseted}
               />
               {/* C Percentage */}
               <InputPercentage
@@ -180,6 +186,7 @@ export default function App() {
                 name="classC"
                 val={classC.percentage}
                 onChange={handleTwo}
+                reset={reseted}
               />
             </LineWrapper>
           </Wrapper>

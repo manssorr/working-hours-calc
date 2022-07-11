@@ -3,7 +3,6 @@ import { Button, Divider } from "react-daisyui";
 
 import { saveState } from "./browser-storage";
 import { debounce } from "debounce";
-import { store } from "./store";
 
 import {
   InputHours,
@@ -62,15 +61,6 @@ export default function App() {
   };
 
   const ifNotNaNGetZero = (value) => (isNaN(value) ? 0 : value);
-
-  // here we subscribe to the store changes
-  store.subscribe(
-    // we use debounce to save the state once each 800ms
-    // for better performances in case multiple changes occur in a short time
-    debounce(() => {
-      saveState(store.getState());
-    }, 800)
-  );
 
   return (
     <>

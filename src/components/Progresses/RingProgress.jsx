@@ -10,7 +10,7 @@ export default function RingProgress({
     <div
       style={{
         minWidth: "max-content",
-        width: "120px"
+        width: "30%"
       }}
       className=" m-2 flex flex-col border-2 p-2 border-solid border-gray-500 rounded-lg justify-between items-center"
     >
@@ -24,7 +24,7 @@ export default function RingProgress({
       </p>
       <Circle
         style={{
-          width: "150px"
+          width: "145px"
         }}
         percent={percent}
         strokeWidth={13}

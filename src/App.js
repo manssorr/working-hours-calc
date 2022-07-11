@@ -64,16 +64,11 @@ export default function App() {
       {/* Container */}
       <div
         className="
-          flex
-          flex-row
-          justify-center
-          items-center
-          flex-wrap
-          w-full
+        grid grid-cols-2
         "
       >
         {/* Left side */}
-        <div className="flex flex-row items-start flex-wrap justify-center items-center">
+        <div className="flex flex-row flex-wrap justify-center items-start mt-4">
           {/* Hours */}
           <Wrapper title="Hours">
             <LineWrapper>
@@ -188,9 +183,8 @@ export default function App() {
               />
             </LineWrapper>
           </Wrapper>
+          <Button onClick={handleClick}>🚀</Button>
         </div>
-
-        <Button onClick={handleClick}>🚀</Button>
 
         {/* Right side */}
         <div className="flex flex-col items-start flex-wrap justify-center items-center">
@@ -211,7 +205,7 @@ export default function App() {
           </div>
 
           {/* Dashboard */}
-          <div className="flex flex-col flex-wrap m-4">
+          <div className="flex flex-col flex-wrap m-1">
             {/* Progresses  */}
             <LineProgress
               percentageA={(classATotal / max) * 100}

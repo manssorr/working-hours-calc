@@ -8,7 +8,8 @@ export default function Badge({
   type = "normal",
   size = "sm",
   max = 20,
-  min = 15
+  min = 15,
+  className = ""
 }) {
   const styles = {
     backgroundColor:
@@ -23,7 +24,7 @@ export default function Badge({
   };
 
   return (
-    <Kbd style={type === "normal" ? {} : styles}>
+    <Kbd className={className} style={type === "normal" ? {} : styles}>
       {title}: {value}
     </Kbd>
   );

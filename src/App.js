@@ -60,14 +60,20 @@ export default function App() {
     <>
       {/* Container */}
       <div
+        style={{
+          display: "flex",
+          alignItems: "start",
+          justifyContent: "center",
+          width: "100vw"
+        }}
         className="
         grid grid-flow-col auto-cols-min md:md:auto-cols-max
         gap-4
         max-w-full
-        "
+        md:h-full        "
       >
         {/* Left side */}
-        <div className="flex flex-row flex-wrap justify-center items-start mt-4">
+        <div className=" flex flex-row flex-wrap justify-center items-center mt-4">
           {/* Hours */}
           <Wrapper title="Hours">
             <LineWrapper>
@@ -196,31 +202,48 @@ export default function App() {
         </div>
 
         {/* Right side */}
-        <div className="flex flex-col items-start flex-wrap justify-center items-center">
+        <div className=" flex flex-col flex-wrap justify-center items-center">
           {/* Badges */}
-          <div className="flex flex-row flex-wrap justify-between items-center gap-4 mt-12 m-4">
+          <div
+            className="flex flex-col gap-6 flex-wrap justify-center mt-4
+            w-full
+          "
+          >
+            <LineProgress
+              className="mx-4 mb-4"
+              percentageA={(classATotal / max) * 100}
+              percentageB={(classBTotal / max) * 100}
+              percentageC={(classCTotal / max) * 100}
+            />
             <Badge
+              className="mx-4"
               title="Total"
               type="main"
               value={total}
               max={max}
               min={min}
             />
-            <Badge title="max" value={max} />
-            <Badge title="min" value={min} />
-            <Badge title="ClassA" value={classATotal} />
-            <Badge title="ClassB" value={classBTotal} />
-            <Badge title="ClassC" value={classCTotal} />
+          </div>
+          <div className="flex flex-row flex-wrap justify-between items-center gap-4 mt-4 m-4">
+            <Badge title="max" value={ifNotNaNGetZero(max).toFixed(2)} />
+            <Badge title="min" value={ifNotNaNGetZero(min).toFixed(2)} />
+            <Badge
+              title="ClassA"
+              value={ifNotNaNGetZero(classATotal).toFixed(2)}
+            />
+            <Badge
+              title="ClassB"
+              value={ifNotNaNGetZero(classBTotal).toFixed(2)}
+            />
+            <Badge
+              title="ClassC"
+              value={ifNotNaNGetZero(classCTotal).toFixed(2)}
+            />
           </div>
 
           {/* Dashboard */}
           <div className="flex flex-col flex-wrap m-1">
             {/* Progresses  */}
-            <LineProgress
-              percentageA={(classATotal / max) * 100}
-              percentageB={(classBTotal / max) * 100}
-              percentageC={(classCTotal / max) * 100}
-            />
             <div className="flex flex-row flex-wrap mt-4 justify-center items-center flex-grow">
               <RingProgress
                 title="Class A"

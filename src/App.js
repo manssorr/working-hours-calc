@@ -35,7 +35,7 @@ export default function App() {
     dispatch(reset());
     forceUpdate();
 
-    console.log("🚀 ~ App reseted 🚽");
+    console.log("🚀 ~ App Reset-ed 🚽");
   }
 
   const { max, min, sarPerHour, sarPerLE } = useSelector(selectDirects);

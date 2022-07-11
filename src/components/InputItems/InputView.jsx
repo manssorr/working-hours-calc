@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Input, InputGroup } from "react-daisyui";
 
-export default function InputView({ title, val, unit }) {
+export default function InputView({ title, val, unit, isInt }) {
   console.log("🚀 ~ val", val);
+
+  const valToView = isInt ? parseInt(val) : parseFloat(val).toFixed(2);
 
   return (
     <>
@@ -27,7 +29,7 @@ export default function InputView({ title, val, unit }) {
           }}
           className="text-2x6 text-center font-san"
         >
-          {val} {unit}
+          {valToView} {unit}
         </span>
       </InputGroup>
     </>

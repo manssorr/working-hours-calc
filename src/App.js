@@ -117,6 +117,7 @@ export default function App() {
                   title="Salary/SR"
                   val={sarPerHour * total}
                   unit="SR"
+                  isInt={true}
                 />
                 {/* <InputView
                   title="Salary/LE"

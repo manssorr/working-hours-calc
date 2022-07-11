@@ -61,7 +61,9 @@ export default function App() {
       {/* Container */}
       <div
         className="
-        grid grid-cols-2
+        grid grid-flow-col auto-cols-min md:md:auto-cols-max
+        gap-4
+        max-w-full
         "
       >
         {/* Left side */}
